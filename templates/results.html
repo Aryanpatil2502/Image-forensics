@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Analysis Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Analysis Results</h1>
+        <p>{{ info.filename }}</p>
+    </header>
+
+    <main class="container">
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <div class="alert">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        <!-- 1. Image preview -->
+        <section class="card">
+            <h2>1. Image Preview</h2>
+            <div class="preview">
+                <img src="{{ url_for('uploaded_file', stored_name=stored_name) }}"
+                     alt="Uploaded image preview">
+            </div>
+        </section>
+
+        <!-- 2. Basic image information -->
+        <section class="card">
+            <h2>2. Image Information</h2>
+            <table>
+                <tr><th>File name</th><td>{{ info.filename }}</td></tr>
+                <tr><th>File format</th><td>{{ info.format }}</td></tr>
+                <tr><th>File size</th><td>{{ info.size_readable }}{% if info.size_bytes >= 1024 %} ({{ info.size_bytes }} bytes){% endif %}</td></tr>
+                <tr><th>Width</th><td>{{ info.width }} pixels</td></tr>
+                <tr><th>Height</th><td>{{ info.height }} pixels</td></tr>
+            </table>
+        </section>
+
+        <!-- 3. Metadata -->
+        <section class="card">
+            <h2>3. Metadata (EXIF)</h2>
+            <table>
+                {% for label, value in info.summary.items() %}
+                <tr><th>{{ label }}</th><td>{{ value }}</td></tr>
+                {% endfor %}
+            </table>
+
+            {% if info.exif %}
+                <details>
+                    <summary>Show all extracted EXIF fields ({{ info.exif|length }})</summary>
+                    <table>
+                        {% for key, value in info.exif.items() %}
+                        <tr><th>{{ key }}</th><td>{{ value }}</td></tr>
+                        {% endfor %}
+                    </table>
+                </details>
+            {% else %}
+                <p class="notice">
+                    No EXIF metadata is available in this image. It may never
+                    have had any (common for PNG files), or it may have been
+                    removed (for example by editing software or social media).
+                </p>
+            {% endif %}
+        </section>
+
+        <!-- 4. Hashes -->
+        <section class="card">
+            <h2>4. File Hashes</h2>
+            <table>
+                <tr><th>MD5</th><td class="mono">{{ info.md5 }}</td></tr>
+                <tr><th>SHA-256</th><td class="mono">{{ info.sha256 }}</td></tr>
+            </table>
+            <p class="hint">
+                A hash is a fixed-length "fingerprint" of a file. If even one
+                byte of the file changes, the hash changes completely. By
+                comparing hashes, you can check that a file has not been
+                altered since the hash was first recorded (file integrity).
+                A hash does <strong>not</strong> prove the image is genuine.
+            </p>
+        </section>
+
+        <!-- Actions -->
+        <section class="card actions">
+            <a class="btn"
+               href="{{ url_for('report', stored_name=stored_name, name=info.filename) }}">
+                Download Report (.txt)
+            </a>
+            <a class="btn btn-secondary" href="{{ url_for('index') }}">
+                Analyze Another Image
+            </a>
+        </section>
+
+        <p class="disclaimer">
+            Disclaimer: Metadata can be edited or removed, and hashes only show
+            integrity. This tool cannot prove whether an image is authentic.
+        </p>
+    </main>
+
+    <footer class="site-footer">
+        College Mini Project &middot; Python &amp; Flask
+    </footer>
+</body>
+</html>

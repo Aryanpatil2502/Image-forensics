@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Digital Forensics Tool for Images</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Digital Forensics Tool for Images</h1>
+        <p>Design and Development of a Digital Forensics Tool for Images</p>
+    </header>
+
+    <main class="container">
+        {# Show error messages (invalid file, too large, etc.) #}
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <div class="alert">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        <section class="card">
+            <h2>About this tool</h2>
+            <p>
+                This tool examines an image file and shows its basic details,
+                embedded EXIF metadata (such as camera model and date/time),
+                and its MD5 and SHA-256 hashes. You can also download a
+                text report of the findings.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Upload an image</h2>
+            <form action="{{ url_for('upload') }}" method="POST"
+                  enctype="multipart/form-data">
+                <input type="file" name="image" accept=".jpg,.jpeg,.png" required>
+                <p class="hint">Allowed: JPG, JPEG, PNG &middot; Max size: {{ max_mb }} MB</p>
+                <button type="submit" class="btn">Analyze Image</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        College Mini Project &middot; Python &amp; Flask
+    </footer>
+</body>
+</html>

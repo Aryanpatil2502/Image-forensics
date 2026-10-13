@@ -1,0 +1,95 @@
+/* Simple, clean styling for the college demonstration */
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f2f5f9;
+    color: #222;
+    line-height: 1.5;
+}
+
+.site-header {
+    background: #1f3a5f;
+    color: #fff;
+    text-align: center;
+    padding: 28px 16px;
+}
+.site-header h1 { margin: 0 0 6px; font-size: 1.9rem; }
+.site-header p  { margin: 0; opacity: 0.85; word-break: break-all; }
+
+.container { max-width: 800px; margin: 24px auto; padding: 0 16px; }
+
+.card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+.card h2 {
+    margin-top: 0;
+    color: #1f3a5f;
+    font-size: 1.25rem;
+    border-bottom: 2px solid #e3e8ef;
+    padding-bottom: 8px;
+}
+
+table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid #e3e8ef;
+    vertical-align: top;
+}
+th { width: 32%; background: #f7f9fc; }
+td { word-break: break-all; }
+.mono { font-family: "Courier New", monospace; font-size: 0.9rem; }
+
+.preview { text-align: center; }
+.preview img {
+    max-width: 100%;
+    max-height: 400px;
+    border: 1px solid #d5dbe3;
+    border-radius: 4px;
+}
+
+.btn {
+    display: inline-block;
+    background: #2a6fdb;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn:hover { background: #1c57b0; }
+.btn-secondary { background: #6b7a8f; }
+.btn-secondary:hover { background: #55627a; }
+.actions { text-align: center; }
+.actions .btn { margin: 4px; }
+
+input[type="file"] { display: block; margin: 8px 0; }
+.hint { color: #555; font-size: 0.9rem; }
+
+.alert {
+    background: #fdecea;
+    border-left: 4px solid #d93025;
+    color: #8a1c14;
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+.notice {
+    background: #fff8e1;
+    border-left: 4px solid #f0ad00;
+    padding: 12px 16px;
+    border-radius: 4px;
+}
+details { margin-top: 12px; }
+summary { cursor: pointer; color: #2a6fdb; font-weight: bold; }
+
+.disclaimer { text-align: center; color: #666; font-size: 0.85rem; }
+.site-footer { text-align: center; color: #777; padding: 20px; font-size: 0.85rem; }

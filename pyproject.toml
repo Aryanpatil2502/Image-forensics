@@ -1,0 +1,10 @@
+[project]
+name = "image-forensics"
+version = "0.1.0"
+description = "Digital forensics tool for images (Flask + Pillow)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "flask>=3.0",
+    "pillow>=10.0",
+]
